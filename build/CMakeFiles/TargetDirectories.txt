@@ -1,0 +1,2 @@
+/Users/ayushgundawar/Documents/Programming/Tiger/build/CMakeFiles/edit_cache.dir
+/Users/ayushgundawar/Documents/Programming/Tiger/build/CMakeFiles/rebuild_cache.dir
