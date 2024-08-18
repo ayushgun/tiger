@@ -1,8 +1,0 @@
-[
-{
-  "directory": "/Users/ayushgundawar/Documents/Programming/Tiger/build",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/ayushgundawar/Documents/Programming/Tiger/include -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -o CMakeFiles/tiger.dir/src/main.cpp.o -c /Users/ayushgundawar/Documents/Programming/Tiger/src/main.cpp",
-  "file": "/Users/ayushgundawar/Documents/Programming/Tiger/src/main.cpp",
-  "output": "CMakeFiles/tiger.dir/src/main.cpp.o"
-}
-]
