@@ -31,16 +31,16 @@ constexpr auto make_tmap(Us&&... us) -> tmap<Us...> {
 }
 
 template <typename T, typename... Ts>
-constexpr auto tmap_get(const tmap<Ts...>& map) -> const T&
-  requires std::is_base_of_v<tmap_node<T>, tmap<Ts...>>
-{
+constexpr auto tmap_get(const tmap<Ts...>& map) -> const T& {
+  static_assert(std::is_base_of_v<tmap_node<T>, tmap<Ts...>>,
+                "T must be a base type of tmap<Ts...>");
   return static_cast<const tmap_node<T>&>(map).value;
 }
 
 template <typename T, typename... Ts>
-constexpr auto tmap_get(tmap<Ts...>& map) -> T&
-  requires std::is_base_of_v<tmap_node<T>, tmap<Ts...>>
-{
+constexpr auto tmap_get(tmap<Ts...>& map) -> T& {
+  static_assert(std::is_base_of_v<tmap_node<T>, tmap<Ts...>>,
+                "T must be a base type of tmap<Ts...>");
   return static_cast<tmap_node<T>&>(map).value;
 }
 
