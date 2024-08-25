@@ -5,6 +5,18 @@
 #include <type_traits>
 #include <utility>
 
+/**
+ * @file type_map.hpp
+ * @brief Compile-time type-to-value mapping container.
+ *
+ * Provides a type-safe container (`tmap`) for mapping types to values.
+ * - `tmap`: Container that associates types with values.
+ * - `tmap_get<T>`: Retrieves the value associated with type `T`.
+ * - `tmap_cat`: Concatenates multiple `tmap` instances.
+ * - `for_each`: Applies a function to each value in the `tmap`.
+ * - `size`: Returns the number of types in the `tmap`.
+ */
+
 namespace tgr {
 
 template <typename T>

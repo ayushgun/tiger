@@ -1,7 +1,21 @@
 #pragma once
 
+#include <cstddef>
 #include <functional>
 #include <type_traits>
+
+/**
+ * @file type_set.hpp
+ * @brief Compile-time type set container.
+ *
+ * Provides a type-safe container (`tset`) for managing a set of types.
+ * - `tset`: Container representing a set of types.
+ * - `tset_contains<T>`: Checks if a type `T` is in the set.
+ * - `tset_cat`: Concatenates multiple `tset` instances.
+ * - `tset_intersect`: Returns the intersection of two `tset` instances.
+ * - `for_each`: Applies a function to each type identity in the `tset`.
+ * - `size`: Returns the number of types in the `tset`.
+ */
 
 namespace tgr {
 
