@@ -1,6 +1,6 @@
 # Tiger
 
-Tiger is an opinionated C++ library offering highly specialized containers and algorithms, such as compile-time heterogeneous type containers or SIMD short strings.
+ A library of highly specialized containers and algorithms, such as compile-time heterogenous type containers or ARM SIMD ultrawide register strings. 
 
 ### Type Map
 
