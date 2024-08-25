@@ -7,11 +7,10 @@
 
 /**
  * @file fast_string.hpp
- * @brief Fixed-size string container optimized for ARM Neon.
+ * @brief String container optimized for strings that can grow up
+ * to 16 bytes.
  *
- * `fstring` provides a lightweight, fixed-size string container
- * designed for 16-byte strings that fit into ARM NEON 128-bit ultrawide
- * registers.
+ * `fstring` is a 16 byte SIMD string fit into ARM NEON 128 bit register.
  *
  * - Constructors: Initialize from a default state or a `std::string_view`.
  * - Element access: Access characters via `at`, `operator[]`, `front`,
@@ -33,9 +32,12 @@ class fstring {
  public:
   fstring();
   fstring(std::string_view sv);
+  fstring(const char* str);
 
   auto operator=(std::string_view sv) -> fstring&;
+  auto operator=(const char* str) -> fstring&;
   auto assign(std::string_view sv) -> fstring&;
+  auto assign(const char* str) -> fstring&;
 
   auto at(std::size_t pos) const -> const char&;
   auto at(std::size_t pos) -> char&;

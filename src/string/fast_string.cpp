@@ -1,7 +1,9 @@
 #include <arm_neon.h>
 #include <algorithm>
+#include <cstddef>
 #include <cstring>
 #include <stdexcept>
+#include <string_view>
 #include <tiger/string/fast_string.hpp>
 
 namespace tgr {
@@ -12,14 +14,29 @@ fstring::fstring(std::string_view sv) {
   assign(sv);
 }
 
+fstring::fstring(const char* str) {
+  assign(str);
+}
+
 auto fstring::operator=(std::string_view sv) -> fstring& {
   return assign(sv);
+}
+
+auto fstring::operator=(const char* str) -> fstring& {
+  return assign(str);
 }
 
 auto fstring::assign(std::string_view sv) -> fstring& {
   _data = vdupq_n_s32(0);
   std::memcpy(reinterpret_cast<char*>(&_data), sv.data(),
               std::min(sv.size(), std::size_t(16)));
+  return *this;
+}
+
+auto fstring::assign(const char* str) -> fstring& {
+  _data = vdupq_n_s32(0);
+  std::size_t len = strnlen(str, 16);
+  std::memcpy(reinterpret_cast<char*>(&_data), str, len);
   return *this;
 }
 
