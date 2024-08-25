@@ -1,10 +1,6 @@
-# Tiger 
+# Tiger
 
-A library of heterogeneous compile-time containers for types.
-
-## Getting Started
-
-These are minimal examples written to showcase the purpose of tiger's containers. This is only the surface of what is possible; to see the comprehensive API, see the header files.
+Tiger is an opinionated C++ library offering highly specialized containers and algorithms, such as compile-time heterogeneous type containers or SIMD short strings.
 
 ### Type Map
 
@@ -15,10 +11,10 @@ These are minimal examples written to showcase the purpose of tiger's containers
 int main() {
   tgr::tmap<int, double, char> map(1, 1.0, 'a');
 
-  // Access an individual value via the type key -- O(1)
+  // Access value by type
   std::cout << tgr::tmap_get<char>(map) << '\n';
 
-  // Iterate over all values in the map -- O(n)
+  // Iterate over all values
   tgr::for_each(map, [](const auto& value) { std::cout << value << '\n'; });
 }
 ```
@@ -33,13 +29,12 @@ int main() {
 int main() {
   tgr::tset<int, double, char*> set;
 
-  // Check for existence of a type -- O(1)
+  // Check for type existence
   std::cout << tgr::tset_contains<int>(set) << '\n';
 
-  // Iterate over all types in the set -- O(n)
+  // Iterate over all types
   tgr::for_each(set, [](auto node) {
     using T = typename decltype(node)::type;
-
     if (std::is_arithmetic_v<T>) {
       std::cout << "Arithmetic type found\n";
     }
@@ -47,3 +42,16 @@ int main() {
 }
 ```
 
+### Fast String
+
+```cpp
+#include <iostream>
+#include <tiger/string/fast_string.hpp>
+
+int main() {
+  tgr::fstring str("Hello, Tiger!");
+  str.push_back('!');
+
+  std::cout << str << '\n';
+}
+```
