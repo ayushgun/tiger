@@ -37,23 +37,23 @@ class fstring {
   auto operator=(std::string_view sv) -> fstring&;
   auto assign(std::string_view sv) -> fstring&;
 
-  auto constexpr at(std::size_t pos) const -> const char&;
-  auto constexpr at(std::size_t pos) -> char&;
+  auto at(std::size_t pos) const -> const char&;
+  auto at(std::size_t pos) -> char&;
   auto operator[](std::size_t pos) const -> const char&;
   auto operator[](std::size_t pos) -> char&;
-  auto constexpr front() const -> const char&;
-  auto constexpr front() -> char&;
-  auto constexpr back() const -> const char&;
-  auto constexpr back() -> char&;
+  auto front() const -> const char&;
+  auto front() -> char&;
+  auto back() const -> const char&;
+  auto back() -> char&;
   auto data() const -> const char*;
   auto data() -> char*;
 
-  auto constexpr cbegin() const noexcept -> const char*;
-  auto constexpr begin() const -> const char*;
-  auto constexpr begin() -> char*;
-  auto constexpr cend() const noexcept -> const char*;
-  auto constexpr end() const -> const char*;
-  auto constexpr end() -> char*;
+  auto cbegin() const noexcept -> const char*;
+  auto begin() const -> const char*;
+  auto begin() -> char*;
+  auto cend() const noexcept -> const char*;
+  auto end() const -> const char*;
+  auto end() -> char*;
 
   auto empty() const -> bool;
   auto size() const -> std::size_t;

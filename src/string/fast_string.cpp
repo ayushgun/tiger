@@ -31,33 +31,33 @@ auto fstring::operator[](std::size_t pos) -> char& {
   return reinterpret_cast<char*>(&_data)[pos];
 }
 
-auto constexpr fstring::at(std::size_t pos) const -> const char& {
+auto fstring::at(std::size_t pos) const -> const char& {
   if (pos >= size()) {
     throw std::out_of_range("fstring::at: position out of range");
   }
   return operator[](pos);
 }
 
-auto constexpr fstring::at(std::size_t pos) -> char& {
+auto fstring::at(std::size_t pos) -> char& {
   if (pos >= size()) {
     throw std::out_of_range("fstring::at: position out of range");
   }
   return operator[](pos);
 }
 
-auto constexpr fstring::front() const -> const char& {
+auto fstring::front() const -> const char& {
   return operator[](0);
 }
 
-auto constexpr fstring::front() -> char& {
+auto fstring::front() -> char& {
   return operator[](0);
 }
 
-auto constexpr fstring::back() const -> const char& {
+auto fstring::back() const -> const char& {
   return operator[](size() - 1);
 }
 
-auto constexpr fstring::back() -> char& {
+auto fstring::back() -> char& {
   return operator[](size() - 1);
 }
 
@@ -69,27 +69,27 @@ auto fstring::data() -> char* {
   return reinterpret_cast<char*>(&_data);
 }
 
-auto constexpr fstring::cbegin() const noexcept -> const char* {
+auto fstring::cbegin() const noexcept -> const char* {
   return data();
 }
 
-auto constexpr fstring::begin() const -> const char* {
+auto fstring::begin() const -> const char* {
   return data();
 }
 
-auto constexpr fstring::begin() -> char* {
+auto fstring::begin() -> char* {
   return data();
 }
 
-auto constexpr fstring::cend() const noexcept -> const char* {
+auto fstring::cend() const noexcept -> const char* {
   return data() + size();
 }
 
-auto constexpr fstring::end() const -> const char* {
+auto fstring::end() const -> const char* {
   return data() + size();
 }
 
-auto constexpr fstring::end() -> char* {
+auto fstring::end() -> char* {
   return data() + size();
 }
 
