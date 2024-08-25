@@ -6,7 +6,7 @@
 #include <string_view>
 
 /**
- * @file fstring.hpp
+ * @file fast_string.hpp
  * @brief Fixed-size string container optimized for ARM Neon.
  *
  * `fstring` provides a lightweight, fixed-size string container
