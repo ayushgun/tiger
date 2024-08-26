@@ -6,11 +6,11 @@
 #include <string_view>
 
 /**
- * @file fast_string.hpp
+ * @file short_string.hpp
  * @brief String container optimized for strings that can grow up
  * to 16 bytes.
  *
- * `fstring` is a 16 byte SIMD string fit into ARM NEON 128 bit register.
+ * `short_string` is a 16 byte SIMD string fit into ARM NEON 128 bit register.
  *
  * - Constructors: Initialize from a default state or a `std::string_view`.
  * - Element access: Access characters via `at`, `operator[]`, `front`,
@@ -28,16 +28,16 @@
 
 namespace tgr {
 
-class fstring {
+class short_string {
  public:
-  fstring();
-  fstring(std::string_view sv);
-  fstring(const char* str);
+  short_string();
+  short_string(std::string_view sv);
+  short_string(const char* str);
 
-  auto operator=(std::string_view sv) -> fstring&;
-  auto operator=(const char* str) -> fstring&;
-  auto assign(std::string_view sv) -> fstring&;
-  auto assign(const char* str) -> fstring&;
+  auto operator=(std::string_view sv) -> short_string&;
+  auto operator=(const char* str) -> short_string&;
+  auto assign(std::string_view sv) -> short_string&;
+  auto assign(const char* str) -> short_string&;
 
   auto at(std::size_t pos) const -> const char&;
   auto at(std::size_t pos) -> char&;
@@ -63,20 +63,19 @@ class fstring {
   auto clear() -> void;
   auto push_back(char c) -> void;
   auto pop_back() -> void;
-  auto append(std::string_view sv) -> fstring&;
-  auto operator+=(std::string_view sv) -> fstring&;
+  auto append(std::string_view sv) -> short_string&;
+  auto operator+=(std::string_view sv) -> short_string&;
 
-  auto find(std::string_view sv, std::size_t pos = 0) const -> std::size_t;
-  auto contains(std::string_view sv) const -> bool;
+  auto operator==(const short_string& other) const -> bool;
+  auto operator+(const short_string& other) const -> short_string;
 
-  auto operator==(const fstring& other) const -> bool;
-  auto operator+(const fstring& other) const -> fstring;
-
-  friend auto operator<<(std::ostream& os, const fstring& fs) -> std::ostream&;
-  friend auto operator>>(std::istream& is, fstring& fs) -> std::istream&;
+  friend auto operator<<(std::ostream& os,
+                         const short_string& fs) -> std::ostream&;
+  friend auto operator>>(std::istream& is, short_string& fs) -> std::istream&;
 
  private:
-  int32x4_t _data;
+  alignas(16) int32x4_t _data;
+  std::size_t _size;
 };
 
 }  // namespace tgr

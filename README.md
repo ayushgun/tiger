@@ -42,16 +42,15 @@ int main() {
 }
 ```
 
-### Fast String
+### Short String
 
 ```cpp
 #include <iostream>
-#include <tiger/string/fast_string.hpp>
+#include <tiger/string/short_string.hpp>
 
 int main() {
-  tgr::fstring str("Hello, Tiger!");
-  str.push_back('!');
-
-  std::cout << str << '\n';
+  tgr::short_string s = "Hi!";
+  std::cout << s << '\n';
+  std::cout << s.size() << '\n';
 }
 ```
