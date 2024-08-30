@@ -1,6 +1,6 @@
 # Tiger
 
- A library of highly specialized containers and algorithms, such as compile-time heterogenous type containers or ARM SIMD ultrawide register strings. 
+ A library of highly specialized containers and algorithms, such as compile-time heterogenous type containers or x86 AVX2 register RAII strings. 
 
 ### Type Map
 
@@ -42,14 +42,17 @@ int main() {
 }
 ```
 
-### Short String
+### Fast String
 
 ```cpp
 #include <iostream>
-#include <tiger/string/short_string.hpp>
+#include <tiger/string/fast_string.hpp>
 
 int main() {
-  tgr::short_string s = "Hi!";
+  tgr::fast_string s = "Hello World";
+
+  // Interoperability with STL APIs
+  std::sort(s.begin(), s.end());
   std::cout << s << '\n';
   std::cout << s.size() << '\n';
 }
