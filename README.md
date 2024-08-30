@@ -45,6 +45,7 @@ int main() {
 ### Fast String
 
 ```cpp
+#include <algorithm>
 #include <iostream>
 #include <tiger/string/fast_string.hpp>
 
