@@ -1,6 +1,6 @@
 # Tiger
 
- A library of highly specialized containers and algorithms, such as compile-time heterogenous type containers or x86 AVX2 register RAII strings. 
+ A library of highly specialized containers and algorithms, such as compile-time heterogenous type containers or x86 AVX2 register strings. 
 
 ### Type Map
 
