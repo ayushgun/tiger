@@ -2,29 +2,29 @@
 #include <cstddef>
 #include <cstring>
 #include <string_view>
-#include <tiger/string/fast_string.hpp>
+#include <tiger/simd/short_string.hpp>
 
 namespace tgr {
 
-fast_string::fast_string() : _data(_mm256_setzero_si256()), _size(0) {}
+short_string::short_string() : _data(_mm256_setzero_si256()), _size(0) {}
 
-fast_string::fast_string(std::string_view sv) {
+short_string::short_string(std::string_view sv) {
   assign(sv);
 }
 
-fast_string::fast_string(const char* str) {
+short_string::short_string(const char* str) {
   assign(str);
 }
 
-auto fast_string::operator=(std::string_view sv) -> fast_string& {
+auto short_string::operator=(std::string_view sv) -> short_string& {
   return assign(sv);
 }
 
-auto fast_string::operator=(const char* str) -> fast_string& {
+auto short_string::operator=(const char* str) -> short_string& {
   return assign(str);
 }
 
-auto fast_string::assign(std::string_view sv) -> fast_string& {
+auto short_string::assign(std::string_view sv) -> short_string& {
   _size = sv.size();
   if (_size > 31) {
     _size = 31;
@@ -37,7 +37,7 @@ auto fast_string::assign(std::string_view sv) -> fast_string& {
   return *this;
 }
 
-auto fast_string::assign(const char* str) -> fast_string& {
+auto short_string::assign(const char* str) -> short_string& {
   _size = std::strlen(str);
   if (_size > 31) {
     _size = 31;
@@ -50,105 +50,105 @@ auto fast_string::assign(const char* str) -> fast_string& {
   return *this;
 }
 
-auto fast_string::operator[](std::size_t pos) const -> const char& {
+auto short_string::operator[](std::size_t pos) const -> const char& {
   return reinterpret_cast<const char*>(&_data)[pos];
 }
 
-auto fast_string::operator[](std::size_t pos) -> char& {
+auto short_string::operator[](std::size_t pos) -> char& {
   return reinterpret_cast<char*>(&_data)[pos];
 }
 
-auto fast_string::at(std::size_t pos) const -> const char& {
+auto short_string::at(std::size_t pos) const -> const char& {
   if (pos >= _size) {
-    throw std::out_of_range("fast_string::at: position out of range");
+    throw std::out_of_range("short_string::at: position out of range");
   }
   return operator[](pos);
 }
 
-auto fast_string::at(std::size_t pos) -> char& {
+auto short_string::at(std::size_t pos) -> char& {
   if (pos >= _size) {
-    throw std::out_of_range("fast_string::at: position out of range");
+    throw std::out_of_range("short_string::at: position out of range");
   }
   return operator[](pos);
 }
 
-auto fast_string::front() const -> const char& {
+auto short_string::front() const -> const char& {
   return operator[](0);
 }
 
-auto fast_string::front() -> char& {
+auto short_string::front() -> char& {
   return operator[](0);
 }
 
-auto fast_string::back() const -> const char& {
+auto short_string::back() const -> const char& {
   return operator[](_size - 1);
 }
 
-auto fast_string::back() -> char& {
+auto short_string::back() -> char& {
   return operator[](_size - 1);
 }
 
-auto fast_string::data() const -> const char* {
+auto short_string::data() const -> const char* {
   return reinterpret_cast<const char*>(&_data);
 }
 
-auto fast_string::data() -> char* {
+auto short_string::data() -> char* {
   return reinterpret_cast<char*>(&_data);
 }
 
-auto fast_string::cbegin() const noexcept -> const char* {
+auto short_string::cbegin() const noexcept -> const char* {
   return data();
 }
 
-auto fast_string::begin() const -> const char* {
+auto short_string::begin() const -> const char* {
   return data();
 }
 
-auto fast_string::begin() -> char* {
+auto short_string::begin() -> char* {
   return data();
 }
 
-auto fast_string::cend() const noexcept -> const char* {
+auto short_string::cend() const noexcept -> const char* {
   return data() + _size;
 }
 
-auto fast_string::end() const -> const char* {
+auto short_string::end() const -> const char* {
   return data() + _size;
 }
 
-auto fast_string::end() -> char* {
+auto short_string::end() -> char* {
   return data() + _size;
 }
 
-auto fast_string::empty() const -> bool {
+auto short_string::empty() const -> bool {
   return _size == 0;
 }
 
-auto fast_string::size() const -> std::size_t {
+auto short_string::size() const -> std::size_t {
   return _size;
 }
 
-auto fast_string::clear() -> void {
+auto short_string::clear() -> void {
   _data = _mm256_setzero_si256();
   _size = 0;
 }
 
-auto fast_string::push_back(char c) -> void {
+auto short_string::push_back(char c) -> void {
   if (_size < 31) {
     operator[](_size++) = c;
     operator[](_size) = '\0';
   } else {
-    throw std::out_of_range("fast_string::push_back: string is full");
+    throw std::out_of_range("short_string::push_back: string is full");
   }
 }
 
-auto fast_string::pop_back() -> void {
+auto short_string::pop_back() -> void {
   if (_size > 0) {
     operator[](--_size) = '\0';
   }
 }
 
-auto fast_string::append(std::string_view sv) -> fast_string& {
+auto short_string::append(std::string_view sv) -> short_string& {
   std::size_t available_space = 31 - _size;
   std::size_t to_copy = std::min(available_space, sv.size());
 
@@ -159,11 +159,11 @@ auto fast_string::append(std::string_view sv) -> fast_string& {
   return *this;
 }
 
-auto fast_string::operator+=(std::string_view sv) -> fast_string& {
+auto short_string::operator+=(std::string_view sv) -> short_string& {
   return append(sv);
 }
 
-auto fast_string::operator==(const fast_string& other) const -> bool {
+auto short_string::operator==(const short_string& other) const -> bool {
   if (_size != other._size) {
     return false;
   }
@@ -172,7 +172,7 @@ auto fast_string::operator==(const fast_string& other) const -> bool {
   return _mm256_movemask_epi8(cmp) == -1;
 }
 
-auto fast_string::operator<(const fast_string& other) const -> bool {
+auto short_string::operator<(const short_string& other) const -> bool {
   __m256i cmp = _mm256_cmpeq_epi8(_data, other._data);
   int eq_mask = _mm256_movemask_epi8(cmp);
 
@@ -191,8 +191,8 @@ auto fast_string::operator<(const fast_string& other) const -> bool {
   return _size < other._size;
 }
 
-auto fast_string::operator+(const fast_string& other) const -> fast_string {
-  fast_string result;
+auto short_string::operator+(const short_string& other) const -> short_string {
+  short_string result;
 
   result._size = _size;
   std::memcpy(result.data(), data(), _size);
@@ -207,11 +207,11 @@ auto fast_string::operator+(const fast_string& other) const -> fast_string {
   return result;
 }
 
-auto operator<<(std::ostream& os, const fast_string& fs) -> std::ostream& {
+auto operator<<(std::ostream& os, const short_string& fs) -> std::ostream& {
   return os.write(fs.data(), fs.size());
 }
 
-auto operator>>(std::istream& is, fast_string& fs) -> std::istream& {
+auto operator>>(std::istream& is, short_string& fs) -> std::istream& {
   fs.clear();
   char buffer[32];
   is.get(buffer, 32);

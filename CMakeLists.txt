@@ -7,7 +7,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_library(tiger)
 
-target_sources(tiger PRIVATE src/string/fast_string.cpp)
+target_sources(tiger PRIVATE src/simd/short_string.cpp)
 
 target_include_directories(tiger PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

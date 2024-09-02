@@ -6,7 +6,7 @@
 
 ```cpp
 #include <iostream>
-#include <tiger/container/type_map.hpp>
+#include <tiger/types/type_map.hpp>
 
 int main() {
   tgr::tmap<int, double, char> map(1, 1.0, 'a');
@@ -23,7 +23,7 @@ int main() {
 
 ```cpp
 #include <iostream>
-#include <tiger/container/type_set.hpp>
+#include <tiger/types/type_set.hpp>
 #include <type_traits>
 
 int main() {
@@ -42,15 +42,15 @@ int main() {
 }
 ```
 
-### Fast String
+### Short String
 
 ```cpp
 #include <algorithm>
 #include <iostream>
-#include <tiger/string/fast_string.hpp>
+#include <tiger/simd/short_string.hpp>
 
 int main() {
-  tgr::fast_string s = "Hello World";
+  tgr::short_string s = "Hello World";
 
   // Interoperability with STL APIs
   std::sort(s.begin(), s.end());
