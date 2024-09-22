@@ -49,6 +49,9 @@ namespace tgr {
 
 class short_string {
  public:
+  using value_type = char;
+  using size_type = std::size_t;
+
   short_string();
   short_string(std::string_view sv);
   short_string(const char* str);
