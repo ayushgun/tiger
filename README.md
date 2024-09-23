@@ -62,6 +62,7 @@ int main() {
 ### Stack Allocator
 
 ```cpp
+#include <iostream>
 #include <vector>
 #include <tiger/stack/stack_allocator.hpp>
 
