@@ -1,6 +1,6 @@
 # Tiger
 
- A library of highly specialized STL-compliant containers and algorithms, such as compile-time heterogenous type containers, x86 AVX2 register strings, or stack memory allocators. 
+ A library of highly specialized STL-compliant containers and algorithms, such as compile-time heterogenous type containers, ARM Neon register strings, or stack memory allocators. 
 
 ### Short String
 
