@@ -57,8 +57,8 @@ constexpr auto tmap_get(tmap<Ts...>& map) -> T& {
 }
 
 template <typename... Ts, typename... Us>
-constexpr auto tmap_cat(const tmap<Ts...>& m1,
-                        const tmap<Us...>& m2) -> tmap<Ts..., Us...> {
+constexpr auto tmap_cat(const tmap<Ts...>& m1, const tmap<Us...>& m2)
+    -> tmap<Ts..., Us...> {
   return tmap<Ts..., Us...>(tmap_get<Ts>(m1)..., tmap_get<Us>(m2)...);
 }
 

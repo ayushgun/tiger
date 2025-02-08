@@ -7,7 +7,7 @@
 ```cpp
 #include <algorithm>
 #include <iostream>
-#include <tiger/simd/short_string.hpp>
+#include <tiger/short_string.hpp>
 
 int main() {
   tgr::short_string s = "Hello World";
@@ -23,7 +23,7 @@ int main() {
 
 ```cpp
 #include <iostream>
-#include <tiger/types/type_map.hpp>
+#include <tiger/type_map.hpp>
 
 int main() {
   tgr::tmap<int, double, char> map(1, 1.0, 'a');
@@ -40,7 +40,7 @@ int main() {
 
 ```cpp
 #include <iostream>
-#include <tiger/types/type_set.hpp>
+#include <tiger/type_set.hpp>
 #include <type_traits>
 
 int main() {
@@ -64,7 +64,7 @@ int main() {
 ```cpp
 #include <iostream>
 #include <vector>
-#include <tiger/stack/stack_allocator.hpp>
+#include <tiger/stack_allocator.hpp>
 
 int main() {
   // Interoperability with STL containers
