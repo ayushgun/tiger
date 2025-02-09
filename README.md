@@ -36,7 +36,7 @@ int main() {
   p.join();
 
   // Launch thread which may be scheduled on E core
-  tgr::performance_thread e(kernel, 10);
+  tgr::efficiency_thread e(kernel, 10);
   e.join();
 
   // Launch thread with custom QoS class
