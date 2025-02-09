@@ -19,6 +19,32 @@ int main() {
 }
 ```
 
+### Service Thread
+
+```cpp
+#include <cmath>
+#include <sys/qos.h>
+#include <tiger/service_thread.hpp>
+
+int kernel(int n) {
+  return std::atan(std::tan(n));
+}
+
+int main() {
+  // Launch thread which may be pinned to P core
+  tgr::performance_thread p(kernel, 10);
+  p.join();
+
+  // Launch thread which may be scheduled on E core
+  tgr::performance_thread e(kernel, 10);
+  e.join();
+
+  // Launch thread with custom QoS class
+  tgr::service_thread<QOS_CLASS_UTILITY> u(kernel, 10);
+  u.join();
+}
+```
+
 ### Type Map
 
 ```cpp
