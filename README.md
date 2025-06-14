@@ -1,49 +1,6 @@
 # Tiger
 
- A library of highly specialized STL-compliant containers and algorithms, such as compile-time heterogenous type containers, ARM Neon register strings, or stack memory allocators. 
-
-### Short String
-
-```cpp
-#include <algorithm>
-#include <iostream>
-#include <tiger/short_string.hpp>
-
-int main() {
-  tgr::short_string s = "Hello World";
-
-  // Interoperability with STL APIs
-  std::sort(s.begin(), s.end());
-  std::cout << s << '\n';
-  std::cout << s.size() << '\n';
-}
-```
-
-### Service Thread
-
-```cpp
-#include <cmath>
-#include <sys/qos.h>
-#include <tiger/service_thread.hpp>
-
-int kernel(int n) {
-  return std::atan(std::tan(n));
-}
-
-int main() {
-  // Launch thread which may be pinned to P core
-  tgr::performance_thread p(kernel, 10);
-  p.join();
-
-  // Launch thread which may be scheduled on E core
-  tgr::efficiency_thread e(kernel, 10);
-  e.join();
-
-  // Launch thread with custom QoS class
-  tgr::service_thread<QOS_CLASS_UTILITY> u(kernel, 10);
-  u.join();
-}
-```
+ A library of highly specialized STL-compliant containers and algorithms, such as compile-time heterogenous type containers, ARM Neon register strings, or stack memory allocators.
 
 ### Type Map
 
@@ -86,6 +43,49 @@ int main() {
       std::cout << "Arithmetic type found\n";
     }
   });
+}
+```
+
+### Short String
+
+```cpp
+#include <algorithm>
+#include <iostream>
+#include <tiger/short_string.hpp>
+
+int main() {
+  tgr::short_string s = "Hello World";
+
+  // Interoperability with STL APIs
+  std::sort(s.begin(), s.end());
+  std::cout << s << '\n';
+  std::cout << s.size() << '\n';
+}
+```
+
+### Service Thread
+
+```cpp
+#include <cmath>
+#include <sys/qos.h>
+#include <tiger/service_thread.hpp>
+
+int kernel(int n) {
+  return std::atan(std::tan(n));
+}
+
+int main() {
+  // Launch thread which may be pinned to P core
+  tgr::performance_thread p(kernel, 10);
+  p.join();
+
+  // Launch thread which may be scheduled on E core
+  tgr::efficiency_thread e(kernel, 10);
+  e.join();
+
+  // Launch thread with custom QoS class
+  tgr::service_thread<QOS_CLASS_UTILITY> u(kernel, 10);
+  u.join();
 }
 ```
 
