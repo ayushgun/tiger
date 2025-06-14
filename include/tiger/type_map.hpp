@@ -68,10 +68,10 @@ constexpr auto tmap_cat(const M1& m1, const M2& m2, const Mn&... mn) {
 }
 
 template <typename Func, typename... Ts>
-constexpr auto for_each(const tmap<Ts...>& map, Func&& func) {
+constexpr auto for_each(const tmap<Ts...>& map, Func&& func) -> void {
   static_assert((std::is_invocable_v<Func, const Ts&> && ...),
                 "Function must be invocable with all values in the tmap");
-  (std::invoke(func, static_cast<tmap_node<const Ts>&>(map).value), ...);
+  (std::invoke(func, static_cast<const tmap_node<const Ts>&>(map).value), ...);
 }
 
 template <typename Func, typename... Ts>

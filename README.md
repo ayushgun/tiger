@@ -51,14 +51,18 @@ int main() {
 #include <iostream>
 #include <tiger/type_map.hpp>
 
+struct A { auto read() -> int { return 1; } };
+struct B { auto read() -> int { return 2; } };
+struct C { auto read() -> int { return 2; } };
+
 int main() {
-  tgr::tmap<int, double, char> map(1, 1.0, 'a');
+  tgr::tmap map(A{}, B{}, C{});
 
   // Access value by type -- O(1)
-  std::cout << tgr::tmap_get<char>(map) << '\n';
+  std::cout << tgr::tmap_get<A>(map).read() << '\n';
 
-  // Iterate over all values -- O(n)
-  tgr::for_each(map, [](const auto& value) { std::cout << value << '\n'; });
+  // Iterate over all types without dynamic dispatch -- O(n)
+  tgr::for_each(map, [](auto& value) { std::cout << value.read() << '\n'; });
 }
 ```
 
